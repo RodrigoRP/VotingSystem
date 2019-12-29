@@ -1,5 +1,6 @@
 package com.rodrigoramos.votingsystem.dto;
 
+import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.validation.EmployeeInsert;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -28,6 +29,13 @@ public class NewEmployeeDTO implements Serializable {
     private String cpf;
 
     public NewEmployeeDTO() {
+    }
+
+    public NewEmployeeDTO(@NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String name, @NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String lastName, @NotEmpty(message = "Preenchimento obrigatório!") @Email(message = "E-mail inválido!") String email, @NotEmpty(message = "Preenchimento obrigatório!") @CPF String cpf) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.cpf = cpf;
     }
 
     public String getName() {

@@ -33,13 +33,29 @@ public class EmployeeService {
         return employeeRepository.save(newEmployee);
     }
 
-    public void delete(Integer id) {
+    public void deleteEmployeeById(Integer id) {
         find(id);
         employeeRepository.deleteById(id);
     }
 
     public List<Employee> findAll() {
         return employeeRepository.findAll();
+    }
+
+
+/*
+    public Employee findByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email);
+        if (employee == null) {
+            throw new ObjectNotFoundException(
+                    "Objeto não encontrado! Id: " + employee.getId() + ", Tipo: " + Employee.class.getName());
+        }
+        return employee;
+    }
+*/
+
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
     }
 
     public Employee convertToModel(NewEmployeeDTO newEmployeeDTO) {
@@ -58,4 +74,5 @@ public class EmployeeService {
         if(employee.getLastName() != null) newEmployee.setLastName(employee.getLastName());
         if(employee.getEmail() != null) newEmployee.setEmail(employee.getEmail());
     }
+
 }

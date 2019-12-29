@@ -1,13 +1,15 @@
 package com.rodrigoramos.votingsystem;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class VotingsystemApplicationTests {
+
+public class VotingsystemApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void toDo() {
+        Assert.assertEquals(Boolean.TRUE, Boolean.TRUE);
     }
 
 }
