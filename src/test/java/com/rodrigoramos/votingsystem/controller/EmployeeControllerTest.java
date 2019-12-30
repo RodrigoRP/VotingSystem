@@ -2,10 +2,9 @@ package com.rodrigoramos.votingsystem.controller;
 
 import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
-import com.rodrigoramos.votingsystem.service.EmployeeService;
+import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,18 +14,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -101,7 +96,7 @@ public class EmployeeControllerTest {
     @Test
     void findById_WhenMatch() {
 
-        Mockito.when(employeeService.find(1)).thenReturn(p1);
+        Mockito.when(employeeService.findById(1)).thenReturn(p1);
         ResponseEntity<Employee> p = employeeController.find(1);
         assertThat(p.getBody(), is(p1) );
     }

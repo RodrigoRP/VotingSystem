@@ -3,7 +3,7 @@ package com.rodrigoramos.votingsystem.controller;
 import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
 import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
-import com.rodrigoramos.votingsystem.service.EmployeeService;
+import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/employees")
+@RequestMapping(value = "api/employees")
 public class EmployeeController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Employee> find(@PathVariable Integer id) {
-        Employee employee = employeeService.find(id);
+        Employee employee = employeeService.findById(id);
         return ResponseEntity.ok().body(employee);
     }
 

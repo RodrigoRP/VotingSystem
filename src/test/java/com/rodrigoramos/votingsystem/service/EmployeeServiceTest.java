@@ -1,31 +1,21 @@
 package com.rodrigoramos.votingsystem.service;
 
-import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
 import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
-import com.rodrigoramos.votingsystem.service.exception.ObjectNotFoundException;
-import org.hamcrest.Matchers;
+import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -103,7 +93,7 @@ public class EmployeeServiceTest {
     public void getEmployeeByIdTest() {
         when(employeeRepository.findById(1)).thenReturn(java.util.Optional.of(new Employee(null, "Lokesh", "Gupta", "user@email.com", "90281067074")));
 
-        Employee emp = employeeService.find(1);
+        Employee emp = employeeService.findById(1);
 
         assertEquals("Lokesh", emp.getName());
         assertEquals("Gupta", emp.getLastName());
