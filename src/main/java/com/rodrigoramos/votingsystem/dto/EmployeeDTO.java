@@ -1,5 +1,6 @@
 package com.rodrigoramos.votingsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.validation.EmployeeUpdate;
 import org.hibernate.validator.constraints.Length;
@@ -23,6 +24,7 @@ public class EmployeeDTO implements Serializable {
     private String email;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
+    @JsonIgnore
     private String password;
 
     public String getPassword() {

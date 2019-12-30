@@ -1,6 +1,7 @@
 package com.rodrigoramos.votingsystem.service.impl;
 
 import com.rodrigoramos.votingsystem.model.Employee;
+import com.rodrigoramos.votingsystem.model.enums.Profile;
 import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,7 @@ public class DBService {
         Employee angelina = new Employee(null, "Angelina", "Jolie", "ang@terra.com.br","18007416005","123456");
         Employee fernanda = new Employee(null, "Fernanda", "Montenegro", "fer@terra.com.br","99740482066","123456");
 
+        jose.addProfile(Profile.ADMIN);
         employeeRepository.saveAll(Arrays.asList(jose, michael, nicolas, robert, tom, angelina, fernanda));
 
     }
