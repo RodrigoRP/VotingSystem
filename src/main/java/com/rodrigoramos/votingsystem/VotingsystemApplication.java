@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VotingsystemApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(VotingsystemApplication.class, args);
     }
 
