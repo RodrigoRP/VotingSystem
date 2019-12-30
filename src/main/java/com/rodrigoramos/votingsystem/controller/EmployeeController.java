@@ -4,6 +4,7 @@ import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
 import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value="Busca por id")
     public ResponseEntity<Employee> find(@PathVariable Integer id) {
         Employee employee = employeeService.findById(id);
         return ResponseEntity.ok().body(employee);
