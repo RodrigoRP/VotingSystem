@@ -7,6 +7,7 @@ import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
 import com.rodrigoramos.votingsystem.service.exception.ObjectNotFoundException;
 import com.rodrigoramos.votingsystem.service.interfaces.EmployeeServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -62,11 +66,11 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     public Employee convertToModel(NewEmployeeDTO newEmployeeDTO) {
         return new Employee(null, newEmployeeDTO.getName(), newEmployeeDTO.getLastName(), newEmployeeDTO.getEmail(),
-                newEmployeeDTO.getCpf());
+                newEmployeeDTO.getCpf(), encoder.encode(newEmployeeDTO.getPassword()));
     }
 
     public Employee convertToModel(EmployeeDTO employeeDTO) {
-        return new Employee(null, employeeDTO.getName(), employeeDTO.getLastName(), employeeDTO.getEmail(), null);
+        return new Employee(null, employeeDTO.getName(), employeeDTO.getLastName(), employeeDTO.getEmail(), null, encoder.encode(employeeDTO.getPassword()));
     }
 
 

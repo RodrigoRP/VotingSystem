@@ -24,7 +24,7 @@ public class EmployeeRepositoryTest {
     @Test
     public void whenFindByName_thenReturnEmployee() {
         // given
-        Employee jose = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048");
+        Employee jose = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048","123456");
 
         //entityManager.persist(jose);
         //entityManager.flush();

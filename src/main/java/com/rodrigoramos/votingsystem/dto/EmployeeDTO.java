@@ -5,6 +5,7 @@ import com.rodrigoramos.votingsystem.service.validation.EmployeeUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @EmployeeUpdate
@@ -20,6 +21,17 @@ public class EmployeeDTO implements Serializable {
 
     @Email(message = "E-mail inválido!")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public EmployeeDTO() {
     }

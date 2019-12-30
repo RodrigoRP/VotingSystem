@@ -44,8 +44,8 @@ public class EmployeeControllerTest {
 
     @BeforeAll
     public static void init() {
-        p1 = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048");
-        p2 = new Employee(2, "Alice", "Moraes","alice@bol.com.br","42597178048");
+        p1 = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048","123456");
+        p2 = new Employee(2, "Alice", "Moraes","alice@bol.com.br","42597178048","123456");
 
         p3 = new NewEmployeeDTO("Maria", "Smith", "maria@ig.com.br","42597178048");
 

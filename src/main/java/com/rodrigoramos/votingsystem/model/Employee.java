@@ -17,16 +17,26 @@ public class Employee implements Serializable {
     private String lastName;
     private String email;
     private String cpf;
+    private String password;
 
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String lastName, String email, String cpf) {
+    public Employee(Integer id, String name, String lastName, String email, String cpf, String password) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.cpf = cpf;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getId() {

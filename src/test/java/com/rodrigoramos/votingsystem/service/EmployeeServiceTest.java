@@ -73,9 +73,9 @@ public class EmployeeServiceTest {
     public void getAllEmployeesTest()
     {
         List<Employee> list = new ArrayList<Employee>();
-        Employee empOne = new Employee(null, "John", "John", "howtodoinjava@gmail.com","04496322021");
-        Employee empTwo = new Employee(null, "Alex", "kolenchiski", "alexk@yahoo.com","25798516075");
-        Employee empThree = new Employee(null, "Steve", "Waugh", "swaugh@gmail.com","90281067074");
+        Employee empOne = new Employee(null, "John", "John", "howtodoinjava@gmail.com","04496322021","123456");
+        Employee empTwo = new Employee(null, "Alex", "kolenchiski", "alexk@yahoo.com","25798516075","123456");
+        Employee empThree = new Employee(null, "Steve", "Waugh", "swaugh@gmail.com","90281067074","123456");
 
         list.add(empOne);
         list.add(empTwo);
@@ -91,7 +91,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void getEmployeeByIdTest() {
-        when(employeeRepository.findById(1)).thenReturn(java.util.Optional.of(new Employee(null, "Lokesh", "Gupta", "user@email.com", "90281067074")));
+        when(employeeRepository.findById(1)).thenReturn(java.util.Optional.of(new Employee(null, "Lokesh", "Gupta", "user@email.com", "90281067074","123456")));
 
         Employee emp = employeeService.findById(1);
 
@@ -102,7 +102,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void createEmployeeTest() {
-        Employee emp = new Employee(null,"Lokesh","Gupta","user@email.com","90281067074");
+        Employee emp = new Employee(null,"Lokesh","Gupta","user@email.com","90281067074","123456");
         employeeService.insert(emp);
         verify(employeeRepository, times(1)).save(emp);
     }
