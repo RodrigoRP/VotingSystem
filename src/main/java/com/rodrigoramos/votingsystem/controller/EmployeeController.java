@@ -7,6 +7,7 @@ import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,6 +40,7 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Void> update(@Valid @RequestBody EmployeeDTO employeeDTO, @PathVariable Integer id) {
         Employee employee = employeeService.convertToModel(employeeDTO);
         employee.setId(id);
@@ -48,6 +50,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         find(id);
         employeeService.deleteEmployeeById(id);
