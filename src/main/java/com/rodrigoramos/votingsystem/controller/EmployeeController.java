@@ -1,7 +1,7 @@
 package com.rodrigoramos.votingsystem.controller;
 
 import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
-import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
+import com.rodrigoramos.votingsystem.dto.EmployeeNewDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import io.swagger.annotations.ApiOperation;
@@ -30,9 +30,15 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employee);
     }
 
+    @GetMapping(value="/email")
+    public ResponseEntity<Employee> find(@RequestParam(value="value") String email) {
+        Employee employee = employeeService.findByEmail(email);
+        return ResponseEntity.ok().body(employee);
+    }
+
     @PostMapping(value = "/")
-    public ResponseEntity<Void> insert(@Valid @RequestBody NewEmployeeDTO newEmployeeDTO) {
-        Employee employee = employeeService.convertToModel(newEmployeeDTO);
+    public ResponseEntity<Void> insert(@Valid @RequestBody EmployeeNewDTO employeeNewDTO) {
+        Employee employee = employeeService.convertToModel(employeeNewDTO);
         employee = employeeService.insert(employee);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(employee.getId()).toUri();

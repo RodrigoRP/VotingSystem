@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @EmployeeInsert
-public class NewEmployeeDTO implements Serializable {
+public class EmployeeNewDTO implements Serializable {
 
     @NotEmpty(message = "Preenchimento obrigatório!")
     @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!")
@@ -31,10 +31,10 @@ public class NewEmployeeDTO implements Serializable {
     @NotEmpty(message = "Preenchimento obrigatório!")
     private String password;
 
-    public NewEmployeeDTO() {
+    public EmployeeNewDTO() {
     }
 
-    public NewEmployeeDTO(@NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String name, @NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String lastName, @NotEmpty(message = "Preenchimento obrigatório!") @Email(message = "E-mail inválido!") String email, @NotEmpty(message = "Preenchimento obrigatório!") @CPF String cpf) {
+    public EmployeeNewDTO(@NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String name, @NotEmpty(message = "Preenchimento obrigatório!") @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!") String lastName, @NotEmpty(message = "Preenchimento obrigatório!") @Email(message = "E-mail inválido!") String email, @NotEmpty(message = "Preenchimento obrigatório!") @CPF String cpf) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;

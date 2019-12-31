@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class UserSS implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
     private String email;
     private String senha;
@@ -42,7 +44,7 @@ public class UserSS implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
@@ -63,5 +65,9 @@ public class UserSS implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasRole(Profile profile) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(profile.getDescription()));
     }
 }

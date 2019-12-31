@@ -1,6 +1,6 @@
 package com.rodrigoramos.votingsystem.controller;
 
-import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
+import com.rodrigoramos.votingsystem.dto.EmployeeNewDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 
@@ -29,7 +29,7 @@ public class EmployeeControllerTest {
 
     private static Employee p1;
     private static Employee p2;
-    private static NewEmployeeDTO p3;
+    private static EmployeeNewDTO p3;
 
     @Mock
     private EmployeeService employeeService;
@@ -47,7 +47,7 @@ public class EmployeeControllerTest {
         p1 = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048","123456");
         p2 = new Employee(2, "Alice", "Moraes","alice@bol.com.br","42597178048","123456");
 
-        p3 = new NewEmployeeDTO("Maria", "Smith", "maria@ig.com.br","42597178048");
+        p3 = new EmployeeNewDTO("Maria", "Smith", "maria@ig.com.br","42597178048");
 
 
 

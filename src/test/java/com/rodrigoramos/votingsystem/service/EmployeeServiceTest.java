@@ -1,6 +1,6 @@
 package com.rodrigoramos.votingsystem.service;
 
-import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
+import com.rodrigoramos.votingsystem.dto.EmployeeNewDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
 import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
@@ -30,8 +30,8 @@ public class EmployeeServiceTest {
     @InjectMocks
     private EmployeeService employeeService;
 
-    private NewEmployeeDTO newEmployeeDTO1;
-    private NewEmployeeDTO newEmployeeDTO2;
+    private EmployeeNewDTO employeeNewDTO1;
+    private EmployeeNewDTO employeeNewDTO2;
 
    /* @MockBean
     private EmployeeRepository employeeRepository;*/
@@ -43,25 +43,25 @@ public class EmployeeServiceTest {
 
     @Before
     public void setup() {
-        newEmployeeDTO1 = new NewEmployeeDTO();
-        newEmployeeDTO1.setName("Adolfo");
-        newEmployeeDTO1.setEmail("adolfo@bol.com.br");
-        newEmployeeDTO1.setLastName("Silva");
-        newEmployeeDTO1.setCpf("16962024002");
+        employeeNewDTO1 = new EmployeeNewDTO();
+        employeeNewDTO1.setName("Adolfo");
+        employeeNewDTO1.setEmail("adolfo@bol.com.br");
+        employeeNewDTO1.setLastName("Silva");
+        employeeNewDTO1.setCpf("16962024002");
 
-        newEmployeeDTO2 = new NewEmployeeDTO();
-        newEmployeeDTO2.setName("Maria");
-        newEmployeeDTO2.setEmail("maria@bol.com.br");
-        newEmployeeDTO2.setLastName("Silva");
-        newEmployeeDTO2.setCpf("16962024002");
+        employeeNewDTO2 = new EmployeeNewDTO();
+        employeeNewDTO2.setName("Maria");
+        employeeNewDTO2.setEmail("maria@bol.com.br");
+        employeeNewDTO2.setLastName("Silva");
+        employeeNewDTO2.setCpf("16962024002");
 
         final List<Employee> employeeList = new ArrayList<>();
 
         Employee employee1 = new Employee();
         Employee employee2 = new Employee();
 
-        employee1 = employeeService.findByEmail(newEmployeeDTO1.getEmail());
-        employee2 = employeeService.findByEmail(newEmployeeDTO2.getEmail());
+        employee1 = employeeService.findByEmail(employeeNewDTO1.getEmail());
+        employee2 = employeeService.findByEmail(employeeNewDTO2.getEmail());
 
         employeeList.add(employee1);
         employeeList.add(employee2);

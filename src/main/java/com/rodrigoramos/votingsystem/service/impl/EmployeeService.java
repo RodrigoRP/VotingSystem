@@ -1,9 +1,12 @@
 package com.rodrigoramos.votingsystem.service.impl;
 
 import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
-import com.rodrigoramos.votingsystem.dto.NewEmployeeDTO;
+import com.rodrigoramos.votingsystem.dto.EmployeeNewDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
+import com.rodrigoramos.votingsystem.model.enums.Profile;
 import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
+import com.rodrigoramos.votingsystem.security.UserSS;
+import com.rodrigoramos.votingsystem.service.exception.AuthorizationException;
 import com.rodrigoramos.votingsystem.service.exception.ObjectNotFoundException;
 import com.rodrigoramos.votingsystem.service.interfaces.EmployeeServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,11 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     @Override
     public Employee findById(Integer id) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
         Optional<Employee> employee = employeeRepository.findById(id);
         return employee.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Employee.class.getName()));
@@ -48,25 +56,22 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employeeRepository.findAll();
     }
 
-
-
     public Employee findByEmail(String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         Employee employee = employeeRepository.findByEmail(email);
         if (employee == null) {
             throw new ObjectNotFoundException(
-                    "Objeto não encontrado! Id: " + employee.getId() + ", Tipo: " + Employee.class.getName());
+                    "Funcionário não encontrado! Id: " + employee.getId() + ", Tipo: " + Employee.class.getName());
         }
         return employee;
     }
 
-
-  /*  public Employee findByEmail(String email) {
-        return employeeRepository.findByEmail(email);
-    }*/
-
-    public Employee convertToModel(NewEmployeeDTO newEmployeeDTO) {
-        return new Employee(null, newEmployeeDTO.getName(), newEmployeeDTO.getLastName(), newEmployeeDTO.getEmail(),
-                newEmployeeDTO.getCpf(), encoder.encode(newEmployeeDTO.getPassword()));
+    public Employee convertToModel(EmployeeNewDTO employeeNewDTO) {
+        return new Employee(null, employeeNewDTO.getName(), employeeNewDTO.getLastName(), employeeNewDTO.getEmail(),
+                employeeNewDTO.getCpf(), encoder.encode(employeeNewDTO.getPassword()));
     }
 
     public Employee convertToModel(EmployeeDTO employeeDTO) {

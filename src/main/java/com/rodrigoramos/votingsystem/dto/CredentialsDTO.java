@@ -1,6 +1,8 @@
 package com.rodrigoramos.votingsystem.dto;
 
-public class CredentialsDTO {
+import java.io.Serializable;
+
+public class CredentialsDTO implements Serializable {
 
     private String email;
     private String password;
