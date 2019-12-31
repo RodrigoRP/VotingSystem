@@ -1,6 +1,5 @@
 package com.rodrigoramos.votingsystem.dto;
 
-import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.validation.EmployeeInsert;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;

@@ -4,6 +4,8 @@ import com.rodrigoramos.votingsystem.dto.EmployeeDTO;
 import com.rodrigoramos.votingsystem.dto.EmployeeNewDTO;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +65,15 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping(value = "/")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<List<EmployeeDTO>> findAll() {
         List<Employee> employeeList = employeeService.findAll();
         List<EmployeeDTO> employeeDTOList = employeeList.stream().map(obj -> new EmployeeDTO(obj))
