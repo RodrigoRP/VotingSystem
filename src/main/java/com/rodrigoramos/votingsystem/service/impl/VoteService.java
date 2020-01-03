@@ -36,7 +36,7 @@ public class VoteService implements VoteServiceInterface {
     public void vote(Integer rest_id, LocalDateTime localDateTime) {
         this.checkVotingAvailability(LocalTime.now(VoteServiceInterface.ZONE_ID));
 
-        Employee employee  = employeeRepository.findByEmail(UserService.authenticated().getUsername());
+        Employee employee = employeeRepository.findByEmail(UserService.authenticated().getUsername());
         if (hasAlreadyVotedToday(employee.getVote())) {
             updateVote(rest_id, employee);
         } else {
@@ -44,6 +44,7 @@ public class VoteService implements VoteServiceInterface {
         }
 
     }
+
 
     private boolean hasAlreadyVotedToday(Vote vote) {
         return vote.getDateUpdated().isEqual(LocalDate.now(VoteServiceInterface.ZONE_ID));
@@ -55,6 +56,7 @@ public class VoteService implements VoteServiceInterface {
         voteRepository.save(vote);
 
     }
+
     private void createVote(Integer rest_id, Employee employee) {
         Vote vote = new Vote(employee);
         vote.setRestaurant_id(rest_id);
@@ -64,6 +66,16 @@ public class VoteService implements VoteServiceInterface {
         employeeRepository.save(employee);
     }
 
+    @Override
+    public long countAll() {
+        return voteRepository.count();
+    }
+
+
+    @Override
+    public long countAllByRestaurantId(Integer restaurantId) {
+        return voteRepository.countAllByRestaurantId(restaurantId);
+    }
 
 
 }

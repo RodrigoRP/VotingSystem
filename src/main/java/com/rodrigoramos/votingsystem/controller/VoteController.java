@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,11 @@ import java.time.LocalDateTime;
 @RequestMapping(value = "api/vote" )
 public class VoteController {
 
-    private VoteServiceInterface voteService;
+    private VoteService voteService;
     private RestaurantService restaurantService;
 
     @Autowired
-    public VoteController(VoteServiceInterface voteService, RestaurantService restaurantService) {
+    public VoteController(VoteService voteService, RestaurantService restaurantService) {
         this.voteService = voteService;
         this.restaurantService = restaurantService;
     }
@@ -40,6 +41,16 @@ public class VoteController {
         voteService.vote(rest_id, LocalDateTime.now(VoteServiceInterface.ZONE_ID));
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/countAll")
+    public long countAll(){
+        return voteService.countAll();
+    }
+
+    @GetMapping(value = "/restaurants/{restaurantId}/count")
+    public long countByRestaurant(@PathVariable("restaurantId") Integer restaurantId){
+        return voteService.countAllByRestaurantId(restaurantId);
     }
 
 }

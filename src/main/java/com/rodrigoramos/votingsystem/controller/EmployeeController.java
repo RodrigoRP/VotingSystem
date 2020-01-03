@@ -32,16 +32,8 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employee);
     }
 
-    @RequestMapping(value="/email", method=RequestMethod.GET)
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "Authorization",
-                    required = true,
-                    dataType = "string",
-                    paramType = "header",
-                    value = "Token de autenticação."
-            )})
-    public ResponseEntity<Employee> find(@RequestParam(value="value") String email) {
+    @GetMapping(value="/email")
+      public ResponseEntity<Employee> findByEmail(@RequestParam(value="value") String email) {
         Employee employee = employeeService.findByEmail(email);
         return ResponseEntity.ok().body(employee);
     }

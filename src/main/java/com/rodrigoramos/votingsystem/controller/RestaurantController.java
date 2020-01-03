@@ -1,6 +1,8 @@
 package com.rodrigoramos.votingsystem.controller;
 
+import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.model.Restaurant;
+import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import com.rodrigoramos.votingsystem.service.impl.RestaurantService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +40,5 @@ public class RestaurantController {
         Restaurant restaurant = restaurantService.findById(id);
         return ResponseEntity.ok().body(restaurant);
     }
+
 }
