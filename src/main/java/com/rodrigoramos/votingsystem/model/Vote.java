@@ -1,53 +1,41 @@
 package com.rodrigoramos.votingsystem.model;
 
-import com.rodrigoramos.votingsystem.security.UserSS;
+import com.rodrigoramos.votingsystem.service.impl.VoteService;
+import lombok.Data;
 
+import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
 @Entity
-public class Vote extends AbstractBaseEntity {
+@Table(name = "votes")
+public class Vote {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "vote_id")
+    private Integer id;
 
-    private LocalDate date;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Employee employee;
+
+    @Column(name = "date_updated")
+    private LocalDate dateUpdated;
+
+    @Column(name = "restaurant_voted")
+    private Integer restaurant_id;
 
     public Vote() {
     }
 
-    public Vote(Integer id, LocalDate date, Employee employee) {
-        super(id);
-        this.date = date;
-        this.employee = employee;
+    public Vote(Employee employee) {
+        this.setEmployee(employee);
     }
 
-    public Vote(Vote vote) {
-        this(vote.getId(), vote.getDate(), vote.getEmployee());
+    @PrePersist
+    private void onCreate() {
+        this.dateUpdated = LocalDate.now(VoteService.ZONE_ID);
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setUser(Employee employee) {
-        this.employee = employee;
-    }
-
-    @Override
-    public String toString() {
-        return "Vote{" +
-                "date=" + date +
-                ", employee=" + employee +
-                ", id=" + id +
-                '}';
-    }
 }

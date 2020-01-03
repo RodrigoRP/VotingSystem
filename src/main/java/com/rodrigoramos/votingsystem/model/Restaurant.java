@@ -1,14 +1,23 @@
 package com.rodrigoramos.votingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
+@Data
+@Table(name = "restaurants")
 public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restaurant_id")
+    @JsonIgnore
     private Integer id;
 
+    @NotBlank(message = "not blank restaurant name")
     @Column(unique = true)
     private String name;
     private String description;
@@ -54,4 +63,6 @@ public class Restaurant {
                 ", id=" + id +
                 '}';
     }
+
+
 }

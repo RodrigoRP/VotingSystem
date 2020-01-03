@@ -25,7 +25,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Override
+
     public Employee findById(Integer id) {
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
@@ -35,6 +35,19 @@ public class EmployeeService implements EmployeeServiceInterface {
         Optional<Employee> employee = employeeRepository.findById(id);
         return employee.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Employee.class.getName()));
+    }
+
+    public Employee findByEmail(String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        Employee employee = employeeRepository.findByEmail(email);
+        if (employee == null) {
+            throw new ObjectNotFoundException(
+                    "Funcionário não encontrado! Id: " + employee.getId() + ", Tipo: " + Employee.class.getName());
+        }
+        return employee;
     }
 
     public Employee insert(Employee employee) {
@@ -56,18 +69,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employeeRepository.findAll();
     }
 
-    public Employee findByEmail(String email) {
-        UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Profile.ADMIN) && !email.equals(user.getUsername())) {
-            throw new AuthorizationException("Acesso negado");
-        }
-        Employee employee = employeeRepository.findByEmail(email);
-        if (employee == null) {
-            throw new ObjectNotFoundException(
-                    "Funcionário não encontrado! Id: " + employee.getId() + ", Tipo: " + Employee.class.getName());
-        }
-        return employee;
-    }
+
 
     public Employee convertToModel(EmployeeNewDTO employeeNewDTO) {
         return new Employee(null, employeeNewDTO.getName(), employeeNewDTO.getLastName(), employeeNewDTO.getEmail(),

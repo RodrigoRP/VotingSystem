@@ -2,6 +2,7 @@ package com.rodrigoramos.votingsystem.controller;
 
 import com.rodrigoramos.votingsystem.model.Restaurant;
 import com.rodrigoramos.votingsystem.service.impl.RestaurantService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,12 @@ public class RestaurantController {
     public ResponseEntity<List<Restaurant>> findAll() {
         List<Restaurant> employeeList = restaurantService.findAll();
         return ResponseEntity.ok().body(employeeList);
+    }
+
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value="Busca por id")
+    public ResponseEntity<Restaurant> find(@PathVariable Integer id) {
+        Restaurant restaurant = restaurantService.findById(id);
+        return ResponseEntity.ok().body(restaurant);
     }
 }

@@ -2,6 +2,7 @@ package com.rodrigoramos.votingsystem.controller.exception;
 
 import com.rodrigoramos.votingsystem.service.exception.AuthorizationException;
 import com.rodrigoramos.votingsystem.service.exception.ObjectNotFoundException;
+import com.rodrigoramos.votingsystem.service.exception.VotingIsUnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -34,6 +35,13 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
 
         StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Acesso negado!", e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
+    @ExceptionHandler(VotingIsUnavailableException.class)
+    public ResponseEntity<StandardError> OutOfTime(VotingIsUnavailableException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Fora do Horario!", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 }

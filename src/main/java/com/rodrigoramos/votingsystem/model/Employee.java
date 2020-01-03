@@ -2,6 +2,7 @@ package com.rodrigoramos.votingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rodrigoramos.votingsystem.model.enums.Profile;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @Entity
+@Data
+@Table(name = "users")
 public class Employee implements Serializable {
 
     @Id
@@ -28,6 +32,10 @@ public class Employee implements Serializable {
     @CollectionTable(name = "PROFILES")
     private Set<Integer> profiles = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "vote_id")
+    private Vote vote;
+
     public Employee() {
         addProfile(Profile.USER);
     }
@@ -39,6 +47,17 @@ public class Employee implements Serializable {
         this.email = email;
         this.cpf = cpf;
         this.password = password;
+        addProfile(Profile.USER);
+    }
+
+    public Employee(Integer id, String name, String lastName, String email, String cpf, String password, Vote vote) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+        this.vote = vote;
         addProfile(Profile.USER);
     }
 
@@ -96,5 +115,12 @@ public class Employee implements Serializable {
 
     public void addProfile(Profile profile) {
         profiles.add(profile.getCod());
+    }
+
+    @PrePersist
+    public void onCreate() {
+        Vote vote = new Vote();
+        vote.setEmployee(this);
+        this.setVote(vote);
     }
 }

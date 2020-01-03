@@ -4,7 +4,6 @@ import com.rodrigoramos.votingsystem.model.Employee;
 
 public interface EmployeeServiceInterface extends ServiceInterface<Employee> {
 
-    Employee findById(Integer id);
-
+    Employee findByEmail(String email);
 
 }
