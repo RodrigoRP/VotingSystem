@@ -19,11 +19,14 @@ import java.util.Optional;
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository, BCryptPasswordEncoder encoder) {
+        this.employeeRepository = employeeRepository;
+        this.encoder = encoder;
+    }
 
 
     public Employee findById(Integer id) {
@@ -31,7 +34,6 @@ public class EmployeeService implements EmployeeServiceInterface {
         if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
             throw new AuthorizationException("Acesso negado");
         }
-
         Optional<Employee> employee = employeeRepository.findById(id);
         return employee.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Employee.class.getName()));

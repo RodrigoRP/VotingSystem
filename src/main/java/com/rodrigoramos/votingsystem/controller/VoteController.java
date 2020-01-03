@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -43,16 +44,41 @@ public class VoteController {
     }
 
     @GetMapping(value = "/countAll")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public long countAll(){
         return voteService.countAll();
     }
 
     @GetMapping(value = "/restaurants/{restaurantId}/count")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public long countByRestaurant(@PathVariable("restaurantId") Integer restaurantId){
         return voteService.countAllByRestaurantId(restaurantId);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/winner")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public long restaurantWinner(){
         return voteService.countWinnerRestaurant();
     }

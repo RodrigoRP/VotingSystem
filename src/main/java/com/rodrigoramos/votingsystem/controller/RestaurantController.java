@@ -1,9 +1,9 @@
 package com.rodrigoramos.votingsystem.controller;
 
-import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.model.Restaurant;
-import com.rodrigoramos.votingsystem.service.impl.EmployeeService;
 import com.rodrigoramos.votingsystem.service.impl.RestaurantService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,14 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @PostMapping(value = "/")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Void> insert(@RequestBody Restaurant restaurant) {
         restaurant = restaurantService.insert(restaurant);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -29,6 +37,14 @@ public class RestaurantController {
     }
 
     @GetMapping(value = "/")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<List<Restaurant>> findAll() {
         List<Restaurant> employeeList = restaurantService.findAll();
         return ResponseEntity.ok().body(employeeList);
@@ -36,6 +52,14 @@ public class RestaurantController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value="Busca por id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Restaurant> find(@PathVariable Integer id) {
         Restaurant restaurant = restaurantService.findById(id);
         return ResponseEntity.ok().body(restaurant);

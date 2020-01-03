@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Entity
 @Data
 @Table(name = "users")
-public class Employee implements Serializable {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Employee implements Serializable {
     private String password;
 
     @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name = "PROFILES")
+    @CollectionTable(name = "profiles")
     private Set<Integer> profiles = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -37,6 +37,11 @@ public class Employee implements Serializable {
     private Vote vote;
 
     public Employee() {
+        addProfile(Profile.USER);
+    }
+    public Employee(Integer id) {
+        this();
+        this.setId(id);
         addProfile(Profile.USER);
     }
 
@@ -50,7 +55,7 @@ public class Employee implements Serializable {
         addProfile(Profile.USER);
     }
 
-    public Employee(Integer id, String name, String lastName, String email, String cpf, String password, Vote vote) {
+/*    public Employee(Integer id, String name, String lastName, String email, String cpf, String password, Vote vote) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -59,7 +64,7 @@ public class Employee implements Serializable {
         this.password = password;
         this.vote = vote;
         addProfile(Profile.USER);
-    }
+    }*/
 
     public String getPassword() {
         return password;

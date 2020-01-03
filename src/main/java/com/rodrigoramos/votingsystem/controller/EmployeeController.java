@@ -27,18 +27,42 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value="Busca por id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Employee> find(@PathVariable Integer id) {
         Employee employee = employeeService.findById(id);
         return ResponseEntity.ok().body(employee);
     }
 
     @GetMapping(value="/email")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
       public ResponseEntity<Employee> findByEmail(@RequestParam(value="value") String email) {
         Employee employee = employeeService.findByEmail(email);
         return ResponseEntity.ok().body(employee);
     }
 
     @PostMapping(value = "/")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Void> insert(@Valid @RequestBody EmployeeNewDTO employeeNewDTO) {
         Employee employee = employeeService.convertToModel(employeeNewDTO);
         employee = employeeService.insert(employee);
@@ -49,6 +73,14 @@ public class EmployeeController {
 
     @PutMapping(value = "/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Void> update(@Valid @RequestBody EmployeeDTO employeeDTO, @PathVariable Integer id) {
         Employee employee = employeeService.convertToModel(employeeDTO);
         employee.setId(id);
@@ -59,6 +91,14 @@ public class EmployeeController {
 
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "Authorization",
+                    required = true,
+                    dataType = "string",
+                    paramType = "header",
+                    value = "Token de autenticação."
+            )})
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         find(id);
         employeeService.deleteEmployeeById(id);
@@ -80,6 +120,5 @@ public class EmployeeController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(employeeDTOList);
     }
-
 
 }
