@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -37,5 +38,16 @@ public class Vote {
         this.dateUpdated = LocalDate.now(VoteService.ZONE_ID);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vote)) return false;
+        Vote vote = (Vote) o;
+        return Objects.equals(getId(), vote.getId());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

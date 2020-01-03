@@ -1,8 +1,12 @@
 package com.rodrigoramos.votingsystem.service.interfaces;
 
+import com.rodrigoramos.votingsystem.model.Vote;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.List;
 
 public interface VoteServiceInterface {
 
@@ -16,4 +20,8 @@ public interface VoteServiceInterface {
     long countAllByRestaurantId(Integer restaurantId);
 
     long countAll();
+
+    List<Vote> findByVotingDate(Date votingDate);
+
+    //List<Vote> countDistinctByRestaurant_id();
 }

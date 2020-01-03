@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +51,16 @@ public class VoteController {
     public long countByRestaurant(@PathVariable("restaurantId") Integer restaurantId){
         return voteService.countAllByRestaurantId(restaurantId);
     }
+
+    @GetMapping(value = "/winner")
+    public long restaurantWinner(){
+        return voteService.countWinnerRestaurant();
+    }
+
+
+
+
+
+
 
 }

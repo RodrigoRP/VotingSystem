@@ -1,17 +1,22 @@
 package com.rodrigoramos.votingsystem.service.impl;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterators;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.model.Vote;
 import com.rodrigoramos.votingsystem.repository.EmployeeRepository;
 import com.rodrigoramos.votingsystem.repository.VoteRepository;
 import com.rodrigoramos.votingsystem.service.exception.VotingIsUnavailableException;
 import com.rodrigoramos.votingsystem.service.interfaces.VoteServiceInterface;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.*;
+import java.sql.Date;
 
 @Service
 public class VoteService implements VoteServiceInterface {
@@ -71,10 +76,30 @@ public class VoteService implements VoteServiceInterface {
         return voteRepository.count();
     }
 
+    @Override
+    public List<Vote> findByVotingDate(Date votingDate) {
+        return voteRepository.findByVotingDate(votingDate);
+    }
 
     @Override
     public long countAllByRestaurantId(Integer restaurantId) {
         return voteRepository.countAllByRestaurantId(restaurantId);
+    }
+
+    public Integer countWinnerRestaurant() {
+        Iterable<Vote> itrVote = voteRepository.findAll();
+        List<Vote> listVote = ImmutableList.copyOf(itrVote);
+        Map<Integer, Integer> countMap = new HashMap<Integer, Integer>();
+
+
+        for (Vote vote : listVote) {
+            Integer result = Math.toIntExact(countAllByRestaurantId(Math.toIntExact(vote.getId())));
+            countMap.put(Math.toIntExact(vote.getId()), result);
+        }
+
+        return countMap.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+
+
     }
 
 
