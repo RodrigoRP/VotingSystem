@@ -15,7 +15,7 @@ public class ScheduledResetWinners {
 
     //@Scheduled(cron = "0 0 1 ? * MON *")
     //@Scheduled(cron = "* * * * * *")
-    @Scheduled(cron = "0 30 11 ? * MON,TUE,WED,THU,FRI *")
+    @Scheduled(cron = "0 30 11 * * 1-5")
     public void resetListWinners() {
         voteService.countWinnerRestaurant();
     }
