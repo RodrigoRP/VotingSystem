@@ -24,7 +24,7 @@ public class DBService {
 
     public void instantiateTestDatabase() throws ParseException {
 
-        Employee jose = new Employee(null, "Jose", "Silva", "jose@terra.com.br","42597178048",encoder.encode("123456"));
+        Employee jose = new Employee(null, "Jose", "Silva", "admin@admin.com.br","42597178048",encoder.encode("123456"));
         Employee michael = new Employee(null, "Michael", "Jackson", "mic@terra.com.br","08108376092",encoder.encode("123456"));
         Employee nicolas = new Employee(null, "Nicolas", "Cage", "nic@terra.com.br","87710225039",encoder.encode("123456"));
         Employee robert = new Employee(null, "Robert", "de Niro", "rob@terra.com.br","02780251026",encoder.encode("123456"));
