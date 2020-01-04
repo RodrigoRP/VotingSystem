@@ -1,12 +1,10 @@
 package com.rodrigoramos.votingsystem.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.service.validation.EmployeeUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @EmployeeUpdate

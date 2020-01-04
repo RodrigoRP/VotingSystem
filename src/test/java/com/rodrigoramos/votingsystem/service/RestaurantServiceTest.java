@@ -1,30 +1,23 @@
 package com.rodrigoramos.votingsystem.service;
 
 
-import com.rodrigoramos.votingsystem.model.Employee;
 import com.rodrigoramos.votingsystem.model.Restaurant;
-import com.rodrigoramos.votingsystem.model.Vote;
 import com.rodrigoramos.votingsystem.repository.RestaurantRepository;
 import com.rodrigoramos.votingsystem.service.impl.RestaurantService;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
-
-import java.util.*;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 
 
@@ -75,6 +68,17 @@ public class RestaurantServiceTest {
         final Restaurant actual = restaurantService.findById(1);
         assertThat(expected).isEqualToComparingFieldByField(actual);
     }
+
+/*
+    @Test
+    public void returnsTrueWhenRequestedEmailExists() {
+        when(restaurantService.checkIfExist(1)).thenReturn(Boolean.TRUE);
+        Assert.assertTrue(restaurantService.checkIfExist(1));
+    }
+*/
+
+
+
 
 
 }

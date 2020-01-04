@@ -28,7 +28,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         this.encoder = encoder;
     }
 
-
+    @Override
     public Employee findById(Integer id) {
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
@@ -39,6 +39,7 @@ public class EmployeeService implements EmployeeServiceInterface {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Employee.class.getName()));
     }
 
+    @Override
     public Employee findByEmail(String email) {
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Profile.ADMIN) && !email.equals(user.getUsername())) {
@@ -52,31 +53,35 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employee;
     }
 
+    @Override
     public Employee insert(Employee employee) {
         return employeeRepository.save(employee);
     }
 
+    @Override
     public Employee update(Employee employee) {
         Employee newEmployee = findById(employee.getId());
         updateData(newEmployee, employee);
         return employeeRepository.save(newEmployee);
     }
 
+    @Override
     public void deleteEmployeeById(Integer id) {
         findById(id);
         employeeRepository.deleteById(id);
     }
 
+    @Override
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
-
 
 
     public Employee convertToModel(EmployeeNewDTO employeeNewDTO) {
         return new Employee(null, employeeNewDTO.getName(), employeeNewDTO.getLastName(), employeeNewDTO.getEmail(),
                 employeeNewDTO.getCpf(), encoder.encode(employeeNewDTO.getPassword()));
     }
+
 
     public Employee convertToModel(EmployeeDTO employeeDTO) {
         return new Employee(null, employeeDTO.getName(), employeeDTO.getLastName(), employeeDTO.getEmail(), null,null);

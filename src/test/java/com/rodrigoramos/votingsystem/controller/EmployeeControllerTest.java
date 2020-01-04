@@ -40,9 +40,9 @@ public class EmployeeControllerTest {
 
     @BeforeAll
     public static void init() {
-        p1 = new Employee(1, "Jose", "Silva", "jose@terra.com.br","42597178048","123456");
-        p2 = new Employee(2, "Alice", "Moraes","alice@bol.com.br","42597178048","123456");
-        p3 = new EmployeeNewDTO("Maria", "Smith", "maria@ig.com.br","42597178048");
+        p1 = new Employee(1, "Jose", "Silva", "jose@terra.com.br", "42597178048", "123456");
+        p2 = new Employee(2, "Alice", "Moraes", "alice@bol.com.br", "42597178048", "123456");
+        p3 = new EmployeeNewDTO("Maria", "Smith", "maria@ig.com.br", "42597178048");
     }
 
 
@@ -68,13 +68,13 @@ public class EmployeeControllerTest {
 
         when(employeeService.findById(1)).thenReturn(p1);
         ResponseEntity<Employee> p = employeeController.find(1);
-        assertThat(p.getBody(), is(p1) );
+        assertThat(p.getBody(), is(p1));
     }
 
     @Test
     void findById_WhenNoMatch() {
 
-       // Mockito.when(employeeService.find(1)).thenReturn(Optional.empty());
+        // Mockito.when(employeeService.find(1)).thenReturn(Optional.empty());
         ResponseEntity<Employee> p = employeeController.find(1);
         assertThat(p.getStatusCode(), is(HttpStatus.OK));
     }
@@ -87,16 +87,11 @@ public class EmployeeControllerTest {
     }
 
     @Test
-        void deleteById_WhenFound() {
+    void deleteById_WhenFound() {
         employeeController.delete(1);
         Mockito.verify(employeeService, Mockito.times(1)).deleteEmployeeById(1);
 
     }
-
-
-
-
-
 
 
 }
