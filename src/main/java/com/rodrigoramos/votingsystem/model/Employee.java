@@ -55,16 +55,6 @@ public class Employee {
         addProfile(Profile.USER);
     }
 
-/*    public Employee(Integer id, String name, String lastName, String email, String cpf, String password, Vote vote) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.cpf = cpf;
-        this.password = password;
-        this.vote = vote;
-        addProfile(Profile.USER);
-    }*/
 
     public String getPassword() {
         return password;

@@ -21,7 +21,4 @@ public interface VoteServiceInterface {
 
     long countAll();
 
-    List<Vote> findByVotingDate(Date votingDate);
-
-    //List<Vote> countDistinctByRestaurant_id();
 }

@@ -79,7 +79,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     public Employee convertToModel(EmployeeDTO employeeDTO) {
-        return new Employee(null, employeeDTO.getName(), employeeDTO.getLastName(), employeeDTO.getEmail(), null, encoder.encode(employeeDTO.getPassword()));
+        return new Employee(null, employeeDTO.getName(), employeeDTO.getLastName(), employeeDTO.getEmail(), null,null);
     }
 
 

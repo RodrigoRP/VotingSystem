@@ -13,16 +13,13 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-
-   // @Query("SELECT COUNT(v) FROM Vote v WHERE v.restaurant_id =:restaurantId")
-    //@Query ("SELECT distinct m.restaurant_id AS restaurant_id, COUNT(m) AS total FROM Vote AS m GROUP BY m.restaurant_id ORDER BY m.restaurant_id ASC")
-  //  long countAllByRestaurantId(@Param("restaurantId") int restaurantId);
-
     @Query("SELECT COUNT(v) FROM Vote v WHERE v.restaurant_id =:restaurantId")
-    long countAllByRestaurantId(@Param("restaurantId") int restaurantId);
+    Integer countAllByRestaurantId(@Param("restaurantId") int restaurantId);
 
-    @Query(value = "select * from votes v where v.votingDate = ?1", nativeQuery = true)
-    List<Vote> findByVotingDate(Date votingDate);
 
-    //List<Vote> countDistinctByRestaurant_id();
+
+    //@Query("UPDATE restaurants r SET r.already_voted = 'TRUE' WHERE r.restaurant_id =:restaurantId")
+   // long updateAlreadyVoted(@Param("restaurantId") int restaurantId);
+
+
 }

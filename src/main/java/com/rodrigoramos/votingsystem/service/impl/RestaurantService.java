@@ -15,8 +15,12 @@ import java.util.Optional;
 @Service
 public class RestaurantService implements RestaurantServiceInterface {
 
+    private final RestaurantRepository restaurantRepository;
+
     @Autowired
-    private RestaurantRepository restaurantRepository;
+    public RestaurantService(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
+    }
 
     public Restaurant insert(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);

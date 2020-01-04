@@ -11,6 +11,7 @@ import java.io.Serializable;
 @EmployeeInsert
 public class EmployeeNewDTO implements Serializable {
 
+    private Integer id;
     @NotEmpty(message = "Preenchimento obrigatório!")
     @Length(min = 2, max = 40, message = "O tamanho deve ser entre 2 e 40 caracteres!")
     private String name;
@@ -39,6 +40,16 @@ public class EmployeeNewDTO implements Serializable {
         this.email = email;
         this.cpf = cpf;
     }
+
+    public EmployeeNewDTO(int id, String name, String lastName, String email, String cpf, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+    }
+
 
     public String getPassword() {
         return password;

@@ -36,15 +36,15 @@ public class DBService {
         employeeRepository.saveAll(Arrays.asList(jose, michael, nicolas, robert, tom, angelina, fernanda));
 
 
-        Restaurant r1 = new Restaurant(null, "Carlo e Camilla in Segheria", "Barbecue");
-        Restaurant r2 = new Restaurant(null,"A Despensa","Italiana, Internacional");
-        Restaurant r3 = new Restaurant(null,"Euskalduna Studio","Europeia, Portuguesa");
-        Restaurant r4 = new Restaurant(null,"éLeBê Entreparedes","Bar, Mediterrânea");
-        Restaurant r5 = new Restaurant(null,"O Paparico","Pub com cerveja artesanal, Portuguesa");
-        Restaurant r6 = new Restaurant(null,"éLeBê Baixa","Steakhouse, Latina");
-        Restaurant r7 = new Restaurant(null,"A Escola by The Artist","Frutos do mar, Mediterrânea");
-        Restaurant r8 = new Restaurant(null,"Essência Restaurante Vegetariano","Steakhouse, Europeia");
-        Restaurant r9 = new Restaurant(null," Intrigo","Mediterrânea, Europeia");
+        Restaurant r1 = new Restaurant(null, "Carlo e Camilla in Segheria", "Barbecue",Boolean.FALSE);
+        Restaurant r2 = new Restaurant(null,"A Despensa","Italiana, Internacional",Boolean.FALSE);
+        Restaurant r3 = new Restaurant(null,"Euskalduna Studio","Europeia, Portuguesa",Boolean.FALSE);
+        Restaurant r4 = new Restaurant(null,"éLeBê Entreparedes","Bar, Mediterrânea",Boolean.FALSE);
+        Restaurant r5 = new Restaurant(null,"O Paparico","Pub com cerveja artesanal, Portuguesa", Boolean.FALSE);
+        Restaurant r6 = new Restaurant(null,"éLeBê Baixa","Steakhouse, Latina",Boolean.FALSE);
+        Restaurant r7 = new Restaurant(null,"A Escola by The Artist","Frutos do mar, Mediterrânea",Boolean.FALSE);
+        Restaurant r8 = new Restaurant(null,"Essência Restaurante Vegetariano","Steakhouse, Europeia",Boolean.FALSE);
+        Restaurant r9 = new Restaurant(null," Intrigo","Mediterrânea, Europeia",Boolean.FALSE);
 
         restaurantRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7, r8, r9));
 

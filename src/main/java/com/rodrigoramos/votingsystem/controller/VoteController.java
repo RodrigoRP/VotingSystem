@@ -83,10 +83,4 @@ public class VoteController {
         return voteService.countWinnerRestaurant();
     }
 
-
-
-
-
-
-
 }

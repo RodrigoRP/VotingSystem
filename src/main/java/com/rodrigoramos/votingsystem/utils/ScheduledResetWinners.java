@@ -13,8 +13,6 @@ public class ScheduledResetWinners {
     @Autowired
     private VoteService voteService;
 
-    //@Scheduled(cron = "0 0 1 ? * MON *")
-    //@Scheduled(cron = "* * * * * *")
     @Scheduled(cron = "0 30 11 * * 1-5")
     public void resetListWinners() {
         voteService.countWinnerRestaurant();

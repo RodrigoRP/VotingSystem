@@ -55,14 +55,6 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/")
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "Authorization",
-                    required = true,
-                    dataType = "string",
-                    paramType = "header",
-                    value = "Token de autenticação."
-            )})
     public ResponseEntity<Void> insert(@Valid @RequestBody EmployeeNewDTO employeeNewDTO) {
         Employee employee = employeeService.convertToModel(employeeNewDTO);
         employee = employeeService.insert(employee);

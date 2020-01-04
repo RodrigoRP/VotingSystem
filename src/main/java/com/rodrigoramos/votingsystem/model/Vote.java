@@ -4,6 +4,7 @@ import com.rodrigoramos.votingsystem.service.impl.VoteService;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vote_id")
-    private Long id;
+    private Integer id;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Employee employee;
@@ -26,6 +27,13 @@ public class Vote {
     private Integer restaurant_id;
 
     public Vote() {
+    }
+
+    public Vote(Integer id, Employee employee, LocalDate dateUpdated, Integer restaurant_id) {
+        this.id = id;
+        this.employee = employee;
+        this.dateUpdated = dateUpdated;
+        this.restaurant_id = restaurant_id;
     }
 
     public Vote(Employee employee) {
