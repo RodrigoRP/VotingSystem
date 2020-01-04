@@ -2,7 +2,6 @@ package com.rodrigoramos.votingsystem;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 
 public class VotingsystemApplicationTests {
